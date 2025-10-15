@@ -15,11 +15,9 @@ const nextConfig: NextConfig = {
     "http://192.168.1.2:3002",
   ],
   eslint: {
-    // Allow production build to succeed even if there are ESLint errors
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // (Optional) allow prod builds even if type errors exist
     ignoreBuildErrors: true,
   },
 };
