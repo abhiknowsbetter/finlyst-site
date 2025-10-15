@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { getSupabase } from '@/lib/supabaseClient';
 
 export default function ContactForm() {
   const [ok, setOk] = useState(false);
@@ -10,6 +10,12 @@ export default function ContactForm() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    const supabase = getSupabase();
+    if (!supabase) {
+      setLoading(false);
+      // Optionally show a message to the user
+      return;
+    }
     const f = new FormData(e.currentTarget);
     const { error } = await supabase.from('contact_messages').insert({
       name: f.get('name'),

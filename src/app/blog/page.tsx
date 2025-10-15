@@ -1,13 +1,21 @@
-import { createClient } from "@supabase/supabase-js";
 
-export const revalidate = 60; // cache for 60s (optional)
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-);
+import { getSupabase } from "@/lib/supabaseClient";
+export const dynamic = "force-dynamic";
 
 export default async function BlogIndex() {
+  const supabase = getSupabase();
+  if (!supabase) {
+    // Render gracefully if envs not available at build/preview
+    return (
+      <section className="section-pad">
+        <div className="container-mx">
+          <h1 className="h2 accent-gradient mb-6">Blog</h1>
+          <p className="text-gray-400">Blog loading…</p>
+        </div>
+      </section>
+    );
+  }
+
   const { data: posts, error } = await supabase
     .from("blog_posts")
     .select("title, slug, excerpt, published_at, created_at")
@@ -35,7 +43,7 @@ export default async function BlogIndex() {
               </a>
             </article>
           ))}
-          {(!posts || posts.length === 0) && <p className="text-gray-400">No posts yet.</p>}
+          {(posts ?? []).length === 0 && <p className="text-gray-400">No posts yet.</p>}
         </div>
       </div>
     </section>
