@@ -5,56 +5,54 @@ import { supabase } from '@/lib/supabaseClient';
 import { X } from 'lucide-react';
 
 export default function WaitlistForm() {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [showMessage, setShowMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (!showMessage) return;
+    const t = setTimeout(() => setShowMessage(false), 5000);
+    return () => clearTimeout(t);
+  }, [showMessage]);
 
   async function onJoin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setLoading(true);
+    setStatus('sending');
     const f = new FormData(formRef.current!);
-    const name = String(f.get("name") || "").trim();
-    const email = String(f.get("email") || "").trim();
+    const name = String(f.get('name') || '').trim();
+    const email = String(f.get('email') || '').trim();
 
-    const { error } = await supabase.from("waitlist").insert({ name, email });
-    setLoading(false);
+    const { error } = await supabase.from('waitlist').insert({ name, email });
     if (!error) {
       formRef.current?.reset();
-      setShowMessage(true); // your success toast
+      setStatus('success');
+      setShowMessage(true);
       return;
     }
 
     // Treat duplicate as success so users aren't blocked
     const isDup =
-      (error as any)?.code === "23505" ||
-      (error.message && error.message.toLowerCase().includes("duplicate"));
+      (error as any)?.code === '23505' ||
+      (error.message && error.message.toLowerCase().includes('duplicate'));
 
     if (isDup) {
+      setStatus('success');
       setShowMessage(true);
       return;
     }
 
-    console.error("Waitlist insert error:", error);
-    alert("Could not join. Please try again.");
+    console.error('Waitlist insert error:', error);
+    setStatus('error');
   }
 
-  useEffect(() => {
-    if (!showMessage) return;
-    const t = setTimeout(() => {
-      setShowMessage(false);
-    }, 5000);
-    return () => clearTimeout(t);
-  }, [showMessage]);
-
-  console.log('Waitlist showMessage:', showMessage);
   return (
     <form ref={formRef} onSubmit={onJoin} className="space-y-3">
       <input className="input-metal" name="name" placeholder="Your Name" required />
       <input className="input-metal" name="email" type="email" placeholder="Your Email" required />
-      <button type="submit" className="btn-metal-gradient" disabled={loading}>
-        {loading ? 'Joining…' : 'Join the Waitlist'}
+      <button type="submit" className="btn-metal-gradient" disabled={status === 'sending'}>
+        {status === 'sending' ? 'Joining…' : 'Join the Waitlist'}
       </button>
-      {showMessage && (
+      {showMessage && status === 'success' && (
         <div>
           {/* Modal Backdrop */}
           <div className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm animate-fade-in" aria-hidden="true" />
@@ -81,7 +79,11 @@ export default function WaitlistForm() {
           </div>
         </div>
       )}
-
-
+      {status === 'error' && (
+        <div className="mt-3 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-red-200">
+          ❌ Could not join. Please try again.
+        </div>
+      )}
     </form>
   );
+}
