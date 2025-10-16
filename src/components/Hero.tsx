@@ -8,6 +8,7 @@ import useParallax from '@/lib/useParallax';
 
 export default function Hero() {
   const parallaxY = useParallax(0, 0.25); // 0.25 = parallax strength
+
   return (
     <header className="section-py container-mx relative">
       <motion.div
@@ -16,10 +17,7 @@ export default function Hero() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="mx-auto max-w-5xl text-center perspective-1000"
       >
-        <div className="relative mx-auto mb-1 flex flex-col items-center justify-center">
-          <div className="logo-glow mb-2" aria-hidden="true">
-            <div className="logo-ring" />
-          </div>
+        <div className="relative mx-auto mb-0 flex flex-col items-center justify-center">
           <motion.div
             initial={{ rotateX: 6, rotateY: -6, scale: 0.98 }}
             whileHover={{ rotateX: 0, rotateY: 0, scale: 1.05 }}
@@ -38,7 +36,7 @@ export default function Hero() {
         </div>
 
         <Reveal>
-          <p className="text-[12px] tracking-[0.2em] text-silver-300 uppercase">
+          <p className="text-[12px] tracking-[0.2em] text-silver-300 uppercase mt-2 mb-1">
             Personal Finance, Refined
           </p>
         </Reveal>

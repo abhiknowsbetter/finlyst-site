@@ -1,15 +1,16 @@
+
 "use client";
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 import { useState } from "react";
 import styles from "./waitlist.module.css";
-
-export const runtime = "edge";
 
 export default function WaitlistPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [ok, setOk] = useState<string | null>("Test message");
+  const [ok, setOk] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -67,7 +68,7 @@ export default function WaitlistPage() {
               onChange={(e) => setName(e.target.value)}
               required
               placeholder="Your name"
-              className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-lg bg-white border border-black px-3 py-2 text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
             />
           </div>
           <div>
@@ -78,7 +79,7 @@ export default function WaitlistPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="you@email.com"
-              className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="w-full rounded-lg bg-white border border-black px-3 py-2 text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-black"
             />
           </div>
 
