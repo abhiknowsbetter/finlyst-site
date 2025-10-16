@@ -15,7 +15,7 @@ export type BlogPost = {
 
 export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
   const supabase = getSupabase();
-  if (!supabase) return []; // avoid crashing at build time
+  if (!supabase) return []; // avoid build-time crashes if envs missing
 
   const { data, error } = await supabase
     .from("blog_posts")
@@ -41,4 +41,9 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
 
   if (error) return null;
   return data as BlogPost;
+}
+
+// Optional compatibility alias if other files still import `getBlogs`
+export async function getBlogs(limit = 6) {
+  return fetchPublishedPosts(limit);
 }
