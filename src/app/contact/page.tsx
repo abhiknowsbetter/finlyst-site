@@ -63,7 +63,7 @@ export default function ContactPage() {
           {/* success toast */}
           {sent && (
             <div className="rounded-lg px-3 py-2 text-sm bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 relative">
-              Thanks! Your message has been sent.
+              An email has been sent. You will receive a reply within 24–48 hours.
               <button
                 type="button"
                 onClick={() => setSent(false)}

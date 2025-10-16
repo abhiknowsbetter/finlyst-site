@@ -25,7 +25,9 @@ export default function ContactForm() {
     });
     setLoading(false);
     if (!error) {
-      e.currentTarget.reset();
+      if (e.currentTarget) {
+        e.currentTarget.reset();
+      }
       setOk(true);
       setTimeout(() => setOk(false), 4000);
     }

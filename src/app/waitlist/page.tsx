@@ -9,7 +9,7 @@ export default function WaitlistPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [ok, setOk] = useState<string | null>(null);
+  const [ok, setOk] = useState<string | null>("Test message");
   const [err, setErr] = useState<string | null>(null);
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
