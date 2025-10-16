@@ -1,4 +1,7 @@
 // src/lib/blogs.ts
+export const runtime = 'edge';       // required by Cloudflare Pages
+export const dynamic = 'force-dynamic'; // avoid SSG at build time
+
 import { getSupabase } from "@/lib/supabaseClient";
 
 export type BlogPost = {
@@ -10,7 +13,6 @@ export type BlogPost = {
   published: boolean;
   created_at: string;
   published_at?: string | null;
-  image_url?: string | null;
 };
 
 export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
@@ -19,7 +21,7 @@ export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
 
   const { data, error } = await supabase
     .from("blog_posts")
-    .select("id, title, slug, excerpt, published, created_at, published_at, image_url")
+    .select("id, title, slug, excerpt, published, created_at, published_at")
     .eq("published", true)
     .order("published_at", { ascending: false })
     .limit(limit);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./waitlist.module.css";
 
 export const runtime = "edge";
 
@@ -54,8 +55,9 @@ export default function WaitlistPage() {
   return (
     <section className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-md rounded-2xl border border-white/10 bg-neutral-900/60 p-6 shadow-lg">
+
         <h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Join the Waitlist</h1>
-        <p className="text-sm text-gray-400 mb-6">Be first to try Finlyst Pro (3 months free for early birds).</p>
+        <p className="text-sm text-gray-400 mb-6">Be first to know when we launch. No spam, promise.</p>
 
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
@@ -76,8 +78,7 @@ export default function WaitlistPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="you@email.com"
-              className="w-full rounded-lg bg_black border border-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
-              style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
+              className="w-full rounded-lg bg-black/40 border border-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
             />
           </div>
 
