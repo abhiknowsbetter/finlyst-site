@@ -1,9 +1,9 @@
 import Section from './Section';
 import Link from 'next/link';
-import { getBlogs } from '@/lib/getBlogs';
+import { fetchPublishedPosts } from '@/lib/blogs';
 
 export default async function Blog() {
-  const posts = await getBlogs();
+  const posts = await fetchPublishedPosts();
 
   return (
     <Section id="blog">

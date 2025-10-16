@@ -1,4 +1,5 @@
-
+// src/lib/blogs.ts
+import { getSupabase } from "@/lib/supabaseClient";
 
 export type BlogPost = {
   id: string;
@@ -13,6 +14,9 @@ export type BlogPost = {
 };
 
 export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
+  const supabase = getSupabase();
+  if (!supabase) return []; // avoid crashing at build time
+
   const { data, error } = await supabase
     .from("blog_posts")
     .select("id, title, slug, excerpt, published, created_at, published_at, image_url")
@@ -25,6 +29,9 @@ export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
 }
 
 export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
+  const supabase = getSupabase();
+  if (!supabase) return null;
+
   const { data, error } = await supabase
     .from("blog_posts")
     .select("*")
@@ -34,31 +41,4 @@ export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
 
   if (error) return null;
   return data as BlogPost;
-}
-import { supabase } from '@/lib/supabaseClient';
-
-export type Blog = Record<string, any>;
-
-export async function getBlogs(): Promise<Blog[]> {
-  // Try primary table 'blogs' first
-  let { data, error } = await supabase
-    .from('blogs')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  // If table doesn't exist, fall back to 'blog_posts'
-  if (error && (error as any)?.code === 'PGRST205') {
-    const fallback = await supabase
-      .from('blog_posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-    data = fallback.data as any[] | null;
-    error = fallback.error as any;
-  }
-
-  if (error) {
-    console.error('[getBlogs] error:', error);
-    return [];
-  }
-  return data || [];
 }
