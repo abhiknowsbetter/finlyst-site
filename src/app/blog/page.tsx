@@ -1,51 +1,46 @@
 
-import { getSupabase } from "@/lib/supabaseClient";
-export const dynamic = "force-dynamic";
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-export default async function BlogIndex() {
+
+
+import { getSupabase } from "@/lib/supabaseClient";
+
+export default async function BlogPage() {
   const supabase = getSupabase();
   if (!supabase) {
-    // Render gracefully if envs not available at build/preview
     return (
-      <section className="section-pad">
-        <div className="container-mx">
-          <h1 className="h2 accent-gradient mb-6">Blog</h1>
-          <p className="text-gray-400">Blog loading…</p>
-        </div>
-      </section>
+      <main className="mx-auto max-w-2xl p-6">
+        <h1 className="text-2xl font-semibold">Blog</h1>
+        <p className="opacity-70 mt-2">Supabase environment variables are missing. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file.</p>
+      </main>
     );
   }
 
   const { data: posts, error } = await supabase
-    .from("blog_posts")
-    .select("title, slug, excerpt, published_at, created_at")
-    .eq("published", true)
-    .order("published_at", { ascending: false });
+    .from('posts')
+    .select('id,title,excerpt,slug,published_at,is_published')
+    .eq('is_published', true)
+    .order('published_at', { ascending: false });
 
-  if (error) {
-    console.error(error);
-  }
+  if (error) throw new Error(`Blog fetch failed: ${error.message}`);
 
   return (
-    <section className="section-pad">
-      <div className="container-mx">
-        <h1 className="h2 accent-gradient mb-6">Blog</h1>
-        <div className="grid gap-6 sm:grid-cols-2">
-          {(posts ?? []).map((p) => (
-            <article key={p.slug} className="card p-6">
-              <h2 className="text-xl font-semibold mb-1">{p.title}</h2>
-              <p className="text-xs text-gray-500 mb-2">
-                Published on {new Date(p.published_at ?? p.created_at).toLocaleDateString()}
-              </p>
-              <p className="text-gray-400 text-sm mb-3">{p.excerpt}</p>
-              <a className="underline text-gray-300 hover:text-white" href={`/blog/${p.slug}`}>
-                Read more →
-              </a>
-            </article>
+    <main className="mx-auto max-w-2xl p-6">
+      <h1 className="text-2xl font-semibold mb-4">Blog</h1>
+      {!posts?.length ? (
+        <p className="opacity-70">No posts yet.</p>
+      ) : (
+        <ul className="space-y-6">
+          {posts.map(p => (
+            <li key={p.id}>
+              <a className="text-xl font-medium underline" href={`/blog/${p.slug}`}>{p.title}</a>
+              <p className="opacity-80">{p.excerpt}</p>
+            </li>
           ))}
-          {(posts ?? []).length === 0 && <p className="text-gray-400">No posts yet.</p>}
-        </div>
-      </div>
-    </section>
+        </ul>
+      )}
+    </main>
   );
 }
