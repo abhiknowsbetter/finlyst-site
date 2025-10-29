@@ -4,7 +4,6 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 import { useState } from "react";
-import styles from "./waitlist.module.css";
 
 export default function WaitlistPage() {
   const [name, setName] = useState("");

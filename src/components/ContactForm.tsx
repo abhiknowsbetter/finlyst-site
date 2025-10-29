@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { getSupabase } from '@/lib/supabaseClient';
 
+
+
 export default function ContactForm() {
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -13,7 +15,6 @@ export default function ContactForm() {
     const supabase = getSupabase();
     if (!supabase) {
       setLoading(false);
-      // Optionally show a message to the user
       return;
     }
     const f = new FormData(e.currentTarget);

@@ -1,9 +1,11 @@
+
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import BlogClient from '@/components/BlogClient';
 import ContactForm from '@/components/ContactForm';
 import Section from '@/components/Section';
 import Footer from '@/components/Footer';
+import WaitlistForm from '@/components/WaitlistForm';
 
 export default function Page() {
   return (
@@ -18,7 +20,7 @@ export default function Page() {
             <h2 className="text-2xl sm:text-3xl font-semibold">Join the Waitlist</h2>
             <p className="mt-2 text-silver-300">Be first to know when we launch. No spam, promise.</p>
             <div className="mx-auto mt-5 max-w-xl">
-              {/* <WaitlistForm /> */}
+              <WaitlistForm />
             </div>
           </section>
 

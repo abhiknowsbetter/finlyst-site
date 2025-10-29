@@ -63,10 +63,10 @@ export default function Navbar() {
   const isActive = (id: string) => active === id;
 
   const nav = [
-    { id: 'features', href: '/features' },
-    { id: 'blog', href: '/blog' },
-    { id: 'waitlist', href: '/waitlist' },
-    { id: 'contact', href: '/contact' },
+    { id: 'features', href: '#features' },
+    { id: 'blog', href: '#blog' },
+    { id: 'waitlist', href: '#waitlist' },
+    { id: 'contact', href: '#contact' },
   ];
 
   return (
@@ -75,18 +75,25 @@ export default function Navbar() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left bg-gradient-to-r from-emerald-400 via-cyan-400 to-fuchsia-400 scroll-progress" />
       <div className="container-mx relative flex h-14 items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
-          <span className="text-2xl font-extrabold tracking-wide text-gray-200">
+          <span
+            className="text-2xl font-extrabold tracking-tight accent-gradient title-soft-glow drop-shadow-lg"
+            style={{ letterSpacing: '-0.03em', textTransform: 'lowercase' }}
+          >
             finlyst
           </span>
         </Link>
         <nav className="hidden items-end gap-6 text-sm text-gray-300 sm:flex">
           {nav.map((item) => (
-            <Link key={item.id} href={item.href} className={`${linkBase} ${isActive(item.id) ? 'text-silver-50' : 'hover:text-gray-100'}`}>
+            <a
+              key={item.id}
+              href={item.href}
+              className={`${linkBase} ${isActive(item.id) ? 'text-silver-50' : 'hover:text-gray-100'}`}
+            >
               <span className="flex flex-col items-center gap-1">
                 <span className="capitalize">{item.id}</span>
                 <span className={`h-0.5 w-8 rounded-full transition-colors ${isActive(item.id) ? 'bg-emerald-400' : 'bg-transparent'}`} />
               </span>
-            </Link>
+            </a>
           ))}
         </nav>
       </div>

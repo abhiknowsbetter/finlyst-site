@@ -19,9 +19,8 @@ export default async function BlogPage() {
   }
 
   const { data: posts, error } = await supabase
-    .from('posts')
-    .select('id,title,excerpt,slug,published_at,is_published')
-    .eq('is_published', true)
+    .from('blog_posts')
+    .select('id,title,excerpt,slug,published_at')
     .order('published_at', { ascending: false });
 
   if (error) throw new Error(`Blog fetch failed: ${error.message}`);
@@ -32,14 +31,23 @@ export default async function BlogPage() {
       {!posts?.length ? (
         <p className="opacity-70">No posts yet.</p>
       ) : (
-        <ul className="space-y-6">
+        <div className="grid gap-6 sm:grid-cols-2">
           {posts.map(p => (
-            <li key={p.id}>
-              <a className="text-xl font-medium underline" href={`/blog/${p.slug}`}>{p.title}</a>
-              <p className="opacity-80">{p.excerpt}</p>
-            </li>
+            <article key={p.id} className="card p-6 flex flex-col justify-between h-full">
+              <div>
+                <h2 className="text-xl font-semibold mb-1">{p.title}</h2>
+                <p className="text-xs text-gray-500 mb-2">Published: {p.published_at ? new Date(p.published_at).toISOString().slice(0, 10) : ''}</p>
+                <p className="opacity-80 mb-3">{p.excerpt}</p>
+              </div>
+              <a
+                className="btn-metal-gradient mt-auto text-center block py-2 px-4 font-medium"
+                href={`/blog/${p.slug}`}
+              >
+                Read more
+              </a>
+            </article>
           ))}
-        </ul>
+        </div>
       )}
     </main>
   );
