@@ -17,7 +17,7 @@ export default function Particles() {
       n.style.top = Math.random() * 100 + 'vh';
     });
     const speeds = nodes.map((_, i) => 0.06 + (i % 5) * 0.02);
-    const angles = nodes.map((_, i) => Math.random() * Math.PI * 2);
+  const angles = nodes.map(() => Math.random() * Math.PI * 2);
 
     const loop = () => {
       const t = performance.now() / 1000;

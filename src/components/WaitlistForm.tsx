@@ -111,10 +111,7 @@ export default function WaitlistForm() {
         <div className="w-full h-2 bg-silver-800 rounded-full overflow-hidden">
           <div
             className="h-2 bg-gradient-to-r from-emerald-400 to-blue-400 transition-all duration-500 waitlist-progress"
-            style={{
-              // Use CSS variable for width
-              ['--progress-width' as any]: `${Math.max(0, Math.min(remaining, 500)) / 500 * 100}%`
-            }}
+            style={{ width: `${Math.max(0, Math.min(remaining, 500)) / 500 * 100}%` }}
           />
         </div>
       </div>
@@ -151,7 +148,7 @@ export default function WaitlistForm() {
         type="submit"
         className="relative inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-[#2F80ED] to-[#56CCF2] shadow-md transition-transform duration-200 text-lg w-full disabled:opacity-60 disabled:cursor-not-allowed focus:ring-2 focus:ring-accent1 hover:scale-105 hover:shadow-lg"
         disabled={loading || eligible}
-        aria-busy={loading}
+  aria-busy={loading}
       >
         {/* Animated Shine on Hover */}
         <span className="absolute left-0 top-0 w-full h-full rounded-full pointer-events-none overflow-hidden">

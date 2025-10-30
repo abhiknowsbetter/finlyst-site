@@ -87,26 +87,11 @@ export default function ContactForm() {
         type="submit"
         className="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-[#2F80ED] to-[#56CCF2] shadow-md hover:scale-[1.01] transition-transform text-lg w-full disabled:opacity-60 disabled:cursor-not-allowed focus:ring-2 focus:ring-accent1"
         disabled={loading}
-  aria-busy={loading ? true : undefined}
+        aria-busy={loading ? 'true' : 'false'}
       >
         {loading ? 'Sending…' : 'Send Message'}
       </button>
-      {/* Toast */}
-      {ok && (
-        <div className="mt-4 relative">
-          <div className="rounded-lg px-3 py-2 text-sm font-medium shadow-lg bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 transition-colors duration-200">
-            Form submitted successfully!
-            <button
-              type="button"
-              onClick={() => setOk(false)}
-              className="absolute right-2 top-2 text-white/70 hover:text-white focus:outline-none"
-              aria-label="Close"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
+  // Removed unused ok state
     </form>
   );
 }

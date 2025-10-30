@@ -54,18 +54,8 @@ export default function ContactPage() {
           </div>
 
           {/* success toast */}
-          {sent && (
-            <div className="rounded-lg px-3 py-2 text-sm bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 relative">
-              An email has been sent. You will receive a reply within 24–48 hours.
-              <button
-                type="button"
-                onClick={() => setSent(false)}
-                className="absolute right-2 top-2 text-white/70 hover:text-white"
-              >
-                ✕
-              </button>
-            </div>
-          )}
+            {/* success toast */}
+            {/* This section has been removed as 'sent' and 'setSent' are no longer defined */}
 
           <button
             type="submit"

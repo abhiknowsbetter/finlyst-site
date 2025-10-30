@@ -375,6 +375,12 @@ a:visited { color: #9ca3af; }
   width: var(--progress-width, 100%);
   transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
-.waitlist-progress[data-width] {
-  width: attr(data-width %); /* modern browsers */
+
+.navbar-logo {
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+.navbar-link {
+  text-align: center;
+  min-width: 80px;
 }

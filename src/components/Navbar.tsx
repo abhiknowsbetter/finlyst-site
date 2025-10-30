@@ -77,8 +77,7 @@ export default function Navbar() {
       <div className="container-mx relative flex h-14 items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
           <span
-            className="text-2xl font-extrabold tracking-tight accent-gradient title-soft-glow drop-shadow-lg"
-            style={{ letterSpacing: '-0.03em', textTransform: 'lowercase' }}
+            className="text-2xl font-extrabold tracking-tight accent-gradient title-soft-glow drop-shadow-lg navbar-logo"
           >
             finlyst
           </span>
@@ -88,8 +87,7 @@ export default function Navbar() {
             <a
               key={item.id}
               href={item.href}
-              className={`${linkBase} ${isActive(item.id) ? 'text-silver-50' : 'hover:text-gray-100'} px-2 py-1 rounded transition-all`}
-              style={{ textAlign: 'center', minWidth: '80px' }}
+              className={`${linkBase} ${isActive(item.id) ? 'text-silver-50' : 'hover:text-gray-100'} px-2 py-1 rounded transition-all navbar-link`}
             >
               <span className="flex flex-col items-center gap-1">
                 <span className="capitalize tracking-wide text-base">{item.id}</span>
