@@ -1,4 +1,93 @@
+@keyframes shine {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(50%); opacity: 0.8; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+
+.animate-shine {
+  animation: shine 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+/* ===== Light Mode Overrides ===== */
+.light {
+  --bg: #fff;
+  --metal-1: #bfa76a; /* gold */
+  --metal-2: #e5e7eb; /* silver */
+  color: #222;
+}
+.light body {
+  background: var(--bg);
+  color: #222;
+}
+.light .header-glow {
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 0 0 rgba(0,0,0,0);
+}
+.light .container-mx, .light .section-pad, .light .section-pad-tight {
+  background: transparent;
+}
+.light .accent-gradient {
+  background: linear-gradient(90deg, var(--metal-1), var(--metal-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.light .accent-silver {
+  background: linear-gradient(90deg, #bfa76a, var(--metal-1), var(--metal-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.light .title-soft-glow {
+  text-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.12);
+}
+.light .card {
+  background: rgba(255,255,255,.98);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 36px rgba(0,0,0,.08), inset 0 1px 0 rgba(0,0,0,.03);
+}
+.light .input-metal {
+  background: #fff;
+  border: 1px solid #bfa76a;
+  color: #222;
+}
+.light .input-metal::placeholder {
+  color: #bfa76a;
+}
+.light .btn-metal-gradient, .light .btn-metal {
+  background: linear-gradient(160deg, #f7f7f9, #e5e7eb);
+  color: #222;
+  border: 1px solid #bfa76a;
+  box-shadow: 0 10px 34px rgba(191,167,106,.12), inset 0 1px 0 rgba(191,167,106,.06);
+}
+.light .btn-metal-gradient:hover, .light .btn-metal:hover {
+  border-color: #bfa76a;
+  box-shadow: 0 14px 40px rgba(191,167,106,.18);
+}
+.light .badge {
+  background: #f7f7f9;
+  color: #bfa76a;
+  border: 1px solid #bfa76a;
+}
+.light a {
+  color: #bfa76a;
+}
+.light a:hover {
+  color: #222;
+}
+.light a:visited {
+  color: #bfa76a;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
 @import "tailwindcss";
+
+:root {
+  --bg: #0f1113;
+  --surface: #121315;
+  --muted: #a3a3a3;
+  --text: #e6e6e6;
+  --accent-1: #2F80ED;
+  --accent-2: #56CCF2;
+  font-family: 'Inter', 'Poppins', ui-sans-serif, system-ui;
+}
 
 /* Tailwind v4 loaded above. */
 

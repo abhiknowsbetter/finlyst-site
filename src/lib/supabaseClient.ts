@@ -1,8 +1,6 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-export function getSupabase(): SupabaseClient | null {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anon) return null; // don't crash during build
-  return createClient(url, anon);
-}
+const supabaseUrl = "https://hzoyfahhigpsfvywpjoj.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6b3lmYWhoaWdwc2Z2eXdwam9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NDM2ODksImV4cCI6MjA3NjAxOTY4OX0.Nq3h2aDUhNi53Rp-MUuOZZn5tb7ddnbdHkXBkNg54hY";
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

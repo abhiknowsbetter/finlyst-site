@@ -4,6 +4,7 @@ export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function WaitlistPage() {
   const [name, setName] = useState("");
@@ -12,9 +13,6 @@ export default function WaitlistPage() {
   const [ok, setOk] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const supabaseAnon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -22,26 +20,15 @@ export default function WaitlistPage() {
     setErr(null);
 
     try {
-      if (!supabaseUrl || !supabaseAnon) {
-        throw new Error('Supabase environment variables are missing.');
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ name, email }]);
+      if (error) {
+        if (error.message.includes('duplicate key value')) {
+          throw new Error('This email is already on the waitlist.');
+        }
+        throw new Error(error.message);
       }
-
-      const res = await fetch(`${supabaseUrl}/rest/v1/waitlist`, {
-        method: 'POST',
-        headers: {
-          apikey: supabaseAnon,
-          Authorization: `Bearer ${supabaseAnon}`,
-          'Content-Type': 'application/json',
-          Prefer: 'return=representation',
-        },
-        body: JSON.stringify({ name, email }),
-      });
-
-      if (!res.ok) {
-        const body = await res.text();
-        throw new Error(`Failed: ${res.status} ${body}`);
-      }
-
       setOk('Thanks for joining the waitlist!');
       setName('');
       setEmail('');

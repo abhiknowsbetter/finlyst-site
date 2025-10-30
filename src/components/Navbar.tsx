@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const sectionIds = useMemo(() => ['features', 'blog', 'waitlist', 'contact'], []);
+  const sectionIds = useMemo(() => ['features', 'blog', 'waitlist', 'contact', 'security'], []);
   const [active, setActive] = useState<string>('');
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Navbar() {
       else if (pathname.startsWith('/features')) setActive('features');
       else if (pathname.startsWith('/waitlist')) setActive('waitlist');
       else if (pathname.startsWith('/contact')) setActive('contact');
-      else setActive('');
+  else if (pathname === '/') setActive('');
     }
 
     return () => {
@@ -65,6 +65,7 @@ export default function Navbar() {
   const nav = [
     { id: 'features', href: '#features' },
     { id: 'blog', href: '#blog' },
+    { id: 'security', href: '#security' },
     { id: 'waitlist', href: '#waitlist' },
     { id: 'contact', href: '#contact' },
   ];
@@ -82,15 +83,16 @@ export default function Navbar() {
             finlyst
           </span>
         </Link>
-        <nav className="hidden items-end gap-6 text-sm text-gray-300 sm:flex">
+        <nav className="hidden sm:flex items-center justify-center gap-8 text-sm text-gray-300">
           {nav.map((item) => (
             <a
               key={item.id}
               href={item.href}
-              className={`${linkBase} ${isActive(item.id) ? 'text-silver-50' : 'hover:text-gray-100'}`}
+              className={`${linkBase} ${isActive(item.id) ? 'text-silver-50' : 'hover:text-gray-100'} px-2 py-1 rounded transition-all`}
+              style={{ textAlign: 'center', minWidth: '80px' }}
             >
               <span className="flex flex-col items-center gap-1">
-                <span className="capitalize">{item.id}</span>
+                <span className="capitalize tracking-wide text-base">{item.id}</span>
                 <span className={`h-0.5 w-8 rounded-full transition-colors ${isActive(item.id) ? 'bg-emerald-400' : 'bg-transparent'}`} />
               </span>
             </a>

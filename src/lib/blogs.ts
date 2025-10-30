@@ -2,7 +2,7 @@
 export const runtime = 'edge';       // required by Cloudflare Pages
 export const dynamic = 'force-dynamic'; // avoid SSG at build time
 
-import { getSupabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 
 export type BlogPost = {
   id: string;
@@ -16,7 +16,6 @@ export type BlogPost = {
 };
 
 export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
-  const supabase = getSupabase();
   if (!supabase) return []; // avoid build-time crashes if envs missing
 
   const { data, error } = await supabase
@@ -31,7 +30,6 @@ export async function fetchPublishedPosts(limit = 6): Promise<BlogPost[]> {
 }
 
 export async function fetchPostBySlug(slug: string): Promise<BlogPost | null> {
-  const supabase = getSupabase();
   if (!supabase) return null;
 
   const { data, error } = await supabase
