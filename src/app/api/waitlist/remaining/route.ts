@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 // Next.js App Router API route for waitlist remaining spots
 import { NextResponse } from 'next/server';
 import fs from 'fs';
