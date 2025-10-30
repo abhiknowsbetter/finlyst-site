@@ -87,11 +87,15 @@ export default function ContactForm() {
         type="submit"
         className="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-[#2F80ED] to-[#56CCF2] shadow-md hover:scale-[1.01] transition-transform text-lg w-full disabled:opacity-60 disabled:cursor-not-allowed focus:ring-2 focus:ring-accent1"
         disabled={loading}
-        aria-busy={loading ? 'true' : 'false'}
+        aria-busy={loading}
       >
         {loading ? 'Sending…' : 'Send Message'}
       </button>
-  // Removed unused ok state
+      {ok && (
+        <div className="mt-4 text-green-400 text-center font-semibold animate-fade-in">
+          Your message was sent successfully! Thank you for reaching out. We&apos;ll get back to you soon.
+        </div>
+      )}
     </form>
   );
 }

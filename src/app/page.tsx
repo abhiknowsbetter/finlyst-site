@@ -35,7 +35,7 @@ export default function Page() {
         <div className="mx-auto max-w-3xl">
           <section id="waitlist" className="text-center">
             <h2 className="text-2xl sm:text-3xl font-semibold">Claim Your First 500 Offer</h2>
-            <p className="mt-2 text-silver-300">First 500 users get 6 months FREE premium. Join now & reserve your spot!</p>
+            <p className="mt-2 text-silver-300">Join now & reserve your spot!</p>
             <div className="mx-auto mt-5 max-w-xl">
               <WaitlistForm />
             </div>

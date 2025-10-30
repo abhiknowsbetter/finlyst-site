@@ -11,7 +11,7 @@ export default async function Blog() {
         <div className="mb-4 flex items-end justify-between">
           <h2 className="text-2xl sm:text-3xl font-semibold">Latest from the Blog</h2>
           <Link href="/blog" className="text-xs text-silver-300 hover:text-silver-100">
-            See all blogs →
+            Visit Our Journal →
           </Link>
         </div>
 

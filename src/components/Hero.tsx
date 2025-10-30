@@ -72,7 +72,7 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
             viewport={{ once: true, amount: 0.2 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-3"
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5"
           >
             <button
               className="relative inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-[#2F80ED] to-[#56CCF2] shadow-md hover:scale-[1.01] transition-transform text-lg"
@@ -86,7 +86,7 @@ export default function Hero() {
               🚀 Join Waitlist & Claim Offer
             </button>
             <button
-              className="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-accent1 border border-accent1 bg-transparent shadow hover:scale-[1.01] transition-transform text-lg"
+              className="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold text-accent1 border border-accent1 bg-transparent shadow hover:scale-[1.01] transition-transform text-lg hover:border-[#56CCF2] hover:text-[#56CCF2] transition-all"
               onClick={() => {
                 const el = document.getElementById('blog');
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
