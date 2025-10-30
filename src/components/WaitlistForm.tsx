@@ -1,3 +1,20 @@
+declare global {
+  interface Window {
+    analytics?: {
+      track?: (event: string, props?: Record<string, any>) => void;
+    };
+  }
+}
+
+"use client";
+"use client";
+declare global {
+  interface Window {
+    analytics?: {
+      track?: (event: string, props?: Record<string, any>) => void;
+    };
+  }
+}
 // Example: joinWaitlist using supabase-js
 // import { supabase } from "@/lib/supabaseClient";
 // async function joinWaitlist() {
@@ -7,15 +24,6 @@
 //   if (error) console.error('waitlist error', error);
 //   else console.log('ok', data);
 // }
-declare global {
-  interface Window {
-    analytics?: {
-      track?: (event: string, props?: Record<string, any>) => void;
-    };
-  }
-}
-"use client";
-
 declare global {
   interface Window {
     analytics?: {
@@ -102,8 +110,11 @@ export default function WaitlistForm() {
         </div>
         <div className="w-full h-2 bg-silver-800 rounded-full overflow-hidden">
           <div
-            className="h-2 bg-gradient-to-r from-emerald-400 to-blue-400 transition-all duration-500"
-            style={{ width: `${Math.max(0, Math.min(remaining, 500)) / 500 * 100}%` }}
+            className="h-2 bg-gradient-to-r from-emerald-400 to-blue-400 transition-all duration-500 waitlist-progress"
+            style={{
+              // Use CSS variable for width
+              ['--progress-width' as any]: `${Math.max(0, Math.min(remaining, 500)) / 500 * 100}%`
+            }}
           />
         </div>
       </div>

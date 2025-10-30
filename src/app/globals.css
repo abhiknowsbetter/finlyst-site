@@ -370,3 +370,11 @@ a:hover { color: #f3f4f6; }
 a { color: #d1d5db; text-decoration: none; }
 a:hover { color: #f3f4f6; }
 a:visited { color: #9ca3af; }
+
+.waitlist-progress {
+  width: var(--progress-width, 100%);
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.waitlist-progress[data-width] {
+  width: attr(data-width %); /* modern browsers */
+}
