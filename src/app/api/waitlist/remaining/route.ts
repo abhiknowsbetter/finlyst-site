@@ -11,10 +11,9 @@ export async function GET() {
     return NextResponse.json({ error: 'Missing Supabase config.' }, { status: 500 });
   }
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
-  const { data, error } = await supabase.from('waitlist').select('id', { count: 'exact', head: true });
+  const { count, error } = await supabase.from('waitlist').select('*', { count: 'exact', head: true });
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-  const count = data?.length ?? 0;
-  return NextResponse.json({ remaining: MAX_SPOTS - count });
+  return NextResponse.json({ remaining: MAX_SPOTS - (count ?? 0) });
 }
