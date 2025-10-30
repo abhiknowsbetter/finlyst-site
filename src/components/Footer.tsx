@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container-mx py-8 text-center text-sm text-gray-400">
         <div className="mb-2 text-gray-500 font-medium">Follow us</div>
         <div className="mb-4 flex items-center justify-center gap-6">
-          <a href="https://x.com/yourhandle" className="hover:text-white transition" target="_blank" rel="noopener">X (Twitter)</a>
+          <a href="https://x.com/Finlystapp" className="hover:text-white transition" target="_blank" rel="noopener">X (Twitter)</a>
           <a href="https://www.instagram.com/finlyst_app?igsh=MXkyaDN1NHpqdGtrcg==" className="hover:text-white transition" target="_blank" rel="noopener">Instagram</a>
           <a href="https://www.linkedin.com/in/finlystapp" className="hover:text-white transition" target="_blank" rel="noopener">LinkedIn</a>
         </div>
