@@ -1,12 +1,3 @@
-declare global {
-  interface Window {
-    analytics?: {
-      track?: (event: string, props?: Record<string, any>) => void;
-    };
-  }
-}
-
-"use client";
 "use client";
 declare global {
   interface Window {
