@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import Features from '@/components/Features';
 
 export const revalidate = 60;

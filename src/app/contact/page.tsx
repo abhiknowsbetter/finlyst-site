@@ -1,14 +1,8 @@
-'use client';
-
-import { useState } from 'react';
-
-export const runtime = 'edge';
+export const dynamic = "force-static";
 
 const FORMSPREE_ACTION = 'https://formspree.io/f/xqaywgdp'; // <-- Formspree form action
 
 export default function ContactPage() {
-  const [sent, setSent] = useState(false);
-
   return (
     <section className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-neutral-900/60 p-6 shadow-lg">
@@ -18,7 +12,6 @@ export default function ContactPage() {
         <form
           action={FORMSPREE_ACTION}
           method="POST"
-          onSubmit={() => setSent(true)}
           className="grid grid-cols-1 gap-4"
         >
           <input type="hidden" name="_subject" value="Finlyst – Contact Form" />
